@@ -21,7 +21,9 @@ spring:
       hibernate.format_sql: true
       hibernate.default_batch_fetch_size: 100
   sql.init.mode: always
-
+  data.rest:
+      base-path: /api # localhost:8080/api로 접속하면 hal explorer이 접속된다.
+      detection-strategy: annotated
 ---
 
 
