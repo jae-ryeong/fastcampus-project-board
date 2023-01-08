@@ -24,9 +24,8 @@ import java.util.Set;
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy"),
 })
-@EntityListeners(AuditingEntityListener.class)
 @Entity
-public class Article {
+public class Article extends AuditingFields{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // id를 기본키로 만들어준것
@@ -42,13 +41,7 @@ public class Article {
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)    // article 테이블로부터 온 것이라고 명시를 해준다, 양방향 바인드(casecade로 강하게 결합되어 있다)
     private final Set<ArticleComment> articleComments = new LinkedHashSet<>();
 
-    @CreatedDate @Column(nullable = false) private LocalDateTime createdAt;    // 생성일시
-    @CreatedBy @Column(nullable = false, length = 100) private String createdBy;            // 생성자
-    @LastModifiedDate @Column(nullable = false) private LocalDateTime modifiedAt;   // 수정일시
-    @LastModifiedBy @Column(nullable = false, length = 100) private String modifiedBy;          // 수정자
-
     // setter를 붙혀주지 않는건 사용자가 임의로 바꿀수 없는 것들이다.
-
 
     protected Article() {}
 
